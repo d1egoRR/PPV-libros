@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSexoDomicilioFechaNacimientoPersonas extends Migration
+class CreateTablePersonas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class AddSexoDomicilioFechaNacimientoPersonas extends Migration
      */
     public function up()
     {
-        Schema::table('personas', function (Blueprint $table) {
-            $table->string('domicilio', 50);
-            $table->char('sexo', 1);
+        Schema::create('personas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nombre', 50);
+            $table->string('apellido', 50);
+            $table->integer('dni');
+            $table->string('domicilio', 100)->nullable();
             $table->date('fecha_nacimiento')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -27,8 +31,6 @@ class AddSexoDomicilioFechaNacimientoPersonas extends Migration
      */
     public function down()
     {
-        Schema::table('personas', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('personas');
     }
 }

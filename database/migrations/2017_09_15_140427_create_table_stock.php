@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePersonas extends Migration
+class CreateTableStock extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTablePersonas extends Migration
      */
     public function up()
     {
-        Schema::create('personas', function (Blueprint $table) {
+        Schema::create('stock', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre', 50);
-            $table->string('apellido', 50);
-            $table->integer('dni');
+            $table->integer('libro_id')->unsigned();
+            $table->foreign('libro_id')->references('id')->on('libros');
+            $table->integer('cantidad_actual');
+            $table->integer('cantidad_minima');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateTablePersonas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('stock');
     }
 }

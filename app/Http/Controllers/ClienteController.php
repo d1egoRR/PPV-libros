@@ -43,5 +43,26 @@ class ClienteController extends Controller
     	$cliente->save();
 
 
+        $mensaje = "CLIENTE CREADO CORRECTAMENTE";
+        return redirect("clientes/create")->with("mensaje", $mensaje);
+
+    }
+
+
+    public function show($id)
+    {
+        $cliente = Cliente::find($id);
+        return view("clientes.show", ["cliente"=>$cliente]);
+    }
+
+    public function destroy($id)
+    {
+        $cliente = Cliente::find($id);
+        $persona = $cliente->persona;
+        $cliente->delete();
+        $persona->delete();
+
+        $mensaje = "CLIENTE BORRADO!";
+        return redirect("clientes")->with("mensaje", $mensaje);
     }
 }

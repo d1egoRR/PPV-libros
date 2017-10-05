@@ -1,4 +1,9 @@
+{{ session("mensaje") }}
+<br><br>
 
+<a href="clientes/create">Nuevo Cliente</a>
+
+<br><br>
 
 <table border="1">
 	<tr>
@@ -6,6 +11,7 @@
 		<th>Apellido</th>
 		<th>DNI</th>
 		<th>ACTIVO</th>
+		<th>-</th>
     </tr>
 
     @foreach ($clientes_list as $cliente)
@@ -15,6 +21,9 @@
 		<td>{{ $cliente->persona->apellido }}</td>
 		<td>{{ $cliente->persona->dni }}</td>
 		<td>{{ $cliente->activo }}</td>
+		<td>
+		    <a href="clientes/{{ $cliente->id }}">Eliminar</a>
+		</td>
     </tr>
 
     @endforeach

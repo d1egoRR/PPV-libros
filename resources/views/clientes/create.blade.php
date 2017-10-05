@@ -1,4 +1,8 @@
 
+
+{{ session("mensaje") }}
+<br>
+
 <form method="POST" action="{{ asset('clientes') }}">
 
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -15,3 +19,7 @@
 
   <input type="submit" value="Guardar datos">
 </form>
+
+<br><br>
+
+<a href="/libros/public/clientes">Listado</a>

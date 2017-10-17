@@ -1,25 +1,27 @@
+@extends('menuPrincipal')
 
+@section('content')
+	{{ session("mensaje") }}
+	<br>
 
-{{ session("mensaje") }}
-<br>
+	<form method="POST" action="{{ asset('clientes') }}">
 
-<form method="POST" action="{{ asset('clientes') }}">
+	  <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+	  Nombre: <input type="text" name="txtNombre"><br>
 
-  Nombre: <input type="text" name="txtNombre"><br>
+	  Apellido: <input type="text" name="txtApellido"><br>
 
-  Apellido: <input type="text" name="txtApellido"><br>
+	  DNI: <input type="text" name="txtDNI"><br>
 
-  DNI: <input type="text" name="txtDNI"><br>
+	  Fecha de Nacimiento: <input type="date" name="txtFechaNacimiento"><br>
 
-  Fecha de Nacimiento: <input type="date" name="txtFechaNacimiento"><br>
+	  Domicilio: <input type="text" name="txtDomicilio"><br>
 
-  Domicilio: <input type="text" name="txtDomicilio"><br>
+	  <input type="submit" value="Guardar datos">
+	</form>
 
-  <input type="submit" value="Guardar datos">
-</form>
+	<br><br>
 
-<br><br>
-
-<a href="/libros/public/clientes">Listado</a>
+	<a href="/libros/public/clientes">Listado</a>
+@endsection

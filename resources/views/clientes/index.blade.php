@@ -1,30 +1,35 @@
-{{ session("mensaje") }}
-<br><br>
+@extends('menuPrincipal')
 
-<a href="clientes/create">Nuevo Cliente</a>
+@section('content')
+	{{ session("mensaje") }}
+	<br><br>
 
-<br><br>
+	<a href="clientes/create">Nuevo Cliente</a>
 
-<table border="1">
-	<tr>
-		<th>Nombre</th>
-		<th>Apellido</th>
-		<th>DNI</th>
-		<th>ACTIVO</th>
-		<th>-</th>
-    </tr>
+	<br><br>
 
-    @foreach ($clientes_list as $cliente)
+	<table border="1">
+		<tr>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>DNI</th>
+			<th>ACTIVO</th>
+			<th>-</th>
+	    </tr>
 
-   	<tr>
-		<td>{{ $cliente->persona->nombre }}</td>
-		<td>{{ $cliente->persona->apellido }}</td>
-		<td>{{ $cliente->persona->dni }}</td>
-		<td>{{ $cliente->activo }}</td>
-		<td>
-		    <a href="clientes/{{ $cliente->id }}">Eliminar</a>
-		</td>
-    </tr>
+	    @foreach ($clientes_list as $cliente)
 
-    @endforeach
-</table>
+	   	<tr>
+			<td>{{ $cliente->persona->nombre }}</td>
+			<td>{{ $cliente->persona->apellido }}</td>
+			<td>{{ $cliente->persona->dni }}</td>
+			<td>{{ $cliente->activo }}</td>
+			<td>
+				<a href="clientes/{{ $cliente->id }}/edit">Modificar</a> - 
+			    <a href="clientes/{{ $cliente->id }}">Eliminar</a>
+			</td>
+	    </tr>
+
+	    @endforeach
+	</table>
+@endsection

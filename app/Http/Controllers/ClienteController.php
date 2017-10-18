@@ -22,7 +22,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
     	// obtener datos enviados desde formulario
-    	$nombre = $request->input("txtNombre");
+        $nombre = $request->input("txtNombre");
     	$apellido = $request->input("txtApellido");
     	$dni = $request->input("txtDNI");
     	$fechaNacimiento = $request->input("txtFechaNacimiento");
@@ -42,10 +42,8 @@ class ClienteController extends Controller
     	$cliente->persona_id = $persona->id;
     	$cliente->save();
 
-
         $mensaje = "CLIENTE CREADO CORRECTAMENTE";
         return redirect("clientes/create")->with("mensaje", $mensaje);
-
     }
 
 
@@ -95,6 +93,5 @@ class ClienteController extends Controller
 
         $mensaje = "CLIENTE MODIFICADO CORRECTAMENTE";
         return redirect("clientes/" . $id . "/edit")->with("mensaje", $mensaje);
-
     }
 }

@@ -12,3 +12,4 @@
 */
 
 Route::resource("clientes", "ClienteController");
+Route::resource("proveedores", "ProveedorController");

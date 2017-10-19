@@ -27,6 +27,11 @@ class ProveedorController extends Controller
         $email = $request->input("txtEmail");
         $domicilio = $request->input("txtDomicilio");
 
+        if ($razonSocial == "") {
+            $mensaje = "ERROR";
+            return redirect("proveedores/create")->with("mensaje", $mensaje);
+        }
+
         // crear nuevo proveedor
         $proveedor = new Proveedor();
         $proveedor->razon_social = $razonSocial;

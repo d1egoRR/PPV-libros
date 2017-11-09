@@ -15,3 +15,6 @@ Route::resource("clientes", "ClienteController");
 Route::resource("proveedores", "ProveedorController");
 Route::resource("libros", "LibroController");
 Route::resource("stock", "StockController");
+Route::resource("facturas", "FacturaController");
+
+Route::get('facturas/{id}/detalle/add', 'FacturaController@detalleadd');

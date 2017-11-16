@@ -5,7 +5,9 @@
 
 	<br><br>
 
-	<form method="POST" action="">
+	<form method="POST" action="{{ asset('facturas/' . $factura->id . '/detalle/store') }}">
+
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<table border="1" width="500" cellspacing="10">
 		  <tr>
@@ -16,9 +18,9 @@
 		  <tr>
 		  	<td>Tipo: {{ $factura->tipo }}</td>
 		  	<td>
-		  	    Cliente: {{ $factura->cliente_id }}
+		  	    Cliente: {{ $factura->cliente->persona->apellido }}, {{ $factura->cliente->persona->nombre }}
 		  	</td>
-		  </tr>
+		  </tr> 
 
 		  <tr>
 		  	<td>
@@ -55,14 +57,32 @@
       	<th>-</th>
       </tr>
 
-      <tr>
-      	<td>500</td>
-      	<td>PPV</td>
-      	<td>25,50</td>
-      	<td>3</td>
-      	<td>76,5</td>
-      	<td>ELIMINAR</td>
-      </tr>
+      <?php
+      $total = 0;
+      ?>
+
+      @foreach ($detalle_list as $detalle)
+        <?php
+        $subtotal = $detalle->precio * $detalle->cantidad;
+        $total = $total + $subtotal;
+        ?>
+        <tr>
+        	<td>{{ $detalle->libro_id }}</td>
+        	<td>{{ $detalle->libro->titulo }}</td>
+        	<td>${{ $detalle->precio }}</td>
+        	<td>{{ $detalle->cantidad }}</td>
+        	<td>${{ $subtotal }}</td>
+        	<td>
+        	  <a href="/libros/public/facturas/detalle/delete/{{$detalle->id}}">
+        	    Eliminar
+        	  </a>
+        	</td>
+        </tr>
+      @endforeach
+      
     </table>
+    <br>
+
+    Total a pagar: ${{ $total }}
 
 @endsection

@@ -24,8 +24,10 @@
 			<td>{{ $factura->numero }}</td>
 			<td>{{ $factura->fecha }}</td>
 			<td>{{ $factura->tipo }}</td>
-			<td>{{ $factura->cliente_id }}</td>
-			<td>$</td>
+			<td>
+				{{ $factura->cliente->persona->apellido }}, {{ $factura->cliente->persona->nombre }}
+			</td>
+			<td>${{ $factura->total }}</td>
 			<td>
 				<a href="facturas/{{ $factura->id }}/detalle/add">Detalle</a>
 			</td>

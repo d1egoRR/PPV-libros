@@ -57,21 +57,13 @@
       	<th>-</th>
       </tr>
 
-      <?php
-      $total = 0;
-      ?>
-
       @foreach ($detalle_list as $detalle)
-        <?php
-        $subtotal = $detalle->precio * $detalle->cantidad;
-        $total = $total + $subtotal;
-        ?>
         <tr>
         	<td>{{ $detalle->libro_id }}</td>
         	<td>{{ $detalle->libro->titulo }}</td>
         	<td>${{ $detalle->precio }}</td>
         	<td>{{ $detalle->cantidad }}</td>
-        	<td>${{ $subtotal }}</td>
+        	<td>${{ $detalle->subtotal }}</td>
         	<td>
         	  <a href="/libros/public/facturas/detalle/delete/{{$detalle->id}}">
         	    Eliminar
@@ -83,6 +75,6 @@
     </table>
     <br>
 
-    Total a pagar: ${{ $total }}
+    Total a pagar: ${{ $factura->total }}
 
 @endsection

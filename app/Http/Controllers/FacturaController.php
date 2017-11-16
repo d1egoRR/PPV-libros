@@ -46,14 +46,22 @@ class FacturaController extends Controller
         $factura->save();
 
         $mensaje = "FACTURA CREADA CORRECTAMENTE";
-        return redirect("facturas/create")->with("mensaje", $mensaje);
+        //return redirect("facturas/create")->with("mensaje", $mensaje);
+        return redirect("facturas/" . $factura->id . "/detalle/add")->with("mensaje", $mensaje);
     }
 
     public function detalleadd($id)
     {
         $factura = Factura::find($id);
+        $factura->total = $factura->obtenerTotal();
+
         $libros_list = Libro::all();
         $detalle_list = DetalleFactura::where('factura_id', $id)->get();
+
+        foreach ($detalle_list as $detalle) {
+            $detalle->subtotal = $detalle->obtenerSubTotal();
+        }
+
         return view(
             'facturas.detalleAdd',
             ['factura'=>$factura, 'libros_list'=>$libros_list, 'detalle_list'=>$detalle_list]

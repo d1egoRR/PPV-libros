@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Factura;
 use App\Models\Libro;
 use App\Models\DetalleFactura;
+use App\Models\Stock;
 
 
 class FacturaController extends Controller
@@ -72,6 +73,16 @@ class FacturaController extends Controller
     {
         $libro_id = $request->input("cboLibro");
         $cantidad = $request->input("txtCantidad");
+
+        $stock = Stock::where('libro_id', $libro_id)->first();
+
+        if ($cantidad > $stock->cantidad_actual) {
+            $mensaje = "NO CUENTA CON LA CANTIDAD NECESARIA";
+            return redirect("facturas/" . $factura_id . "/detalle/add")->with("mensaje", $mensaje);
+        }
+
+        $stock->cantidad_actual = $stock->cantidad_actual - $cantidad;
+        $stock->save();
 
         $libro = Libro::find($libro_id);
 
